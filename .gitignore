@@ -6,3 +6,6 @@ raw/
 __pycache__/
 .DS_Store
 .obsidian/
+
+# Theme reference images from the user (source unknown, not for publishing)
+assets/
