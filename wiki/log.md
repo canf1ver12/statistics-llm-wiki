@@ -231,3 +231,12 @@
   - [N4 lint][不通過] 報告寫著「句號是最常見的錯誤」，報告本身卻有 8 個句號，AGENTS.md 也新增 1 個；原因是 lint 只檢查 wiki/ → 修正句號，並把寫作風格檢查擴大到 AGENTS.md、CLAUDE.md、README.md、docs/，放入含句號的暫存檔確認新規則會抓到後刪除
   - [N4 lint][通過] 修正後全部通過
 - 異動頁面：docs/assignment-report.md、README.md、AGENTS.md、tools/lint_wiki.py、wiki/log.md
+
+## [2026-11-23 15:54] schema | 推送前抓到 log 裡的學校名稱
+
+- 摘要：照新的 N9 規則，推送前掃描要推送的 9 個 commit，發現「移除學校名稱」那筆 log 自己寫出了學校名稱（中文和英文縮寫各一次）
+- 檢查：
+  - [N9 publish][不通過] log 記錄移除學校名稱時引用了名稱本身 → 改寫成「學校名稱」，用 filter-branch 改寫尚未推送的 9 個 commit，刪除本機的舊歷史備份，確認推送範圍內為 0 筆後才推送，不需要強制推送
+  - [N9 publish][通過] 修正後推送
+- 補充：每個 commit 的作者資訊都包含使用者的 git email，這是 git 的預設行為，已告知使用者可改用 GitHub 提供的 noreply email
+- 異動頁面：wiki/log.md
