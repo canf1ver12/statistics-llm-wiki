@@ -240,3 +240,22 @@
   - [N9 publish][通過] 修正後推送
 - 補充：每個 commit 的作者資訊都包含使用者的 git email，這是 git 的預設行為，已告知使用者可改用 GitHub 提供的 noreply email
 - 異動頁面：wiki/log.md
+
+## [2026-11-23 15:58] schema | 從 git 歷史中完全刪除作業報告
+
+- 摘要：使用者要求作業報告不放上 GitHub，並從歷史中完全刪除；用 filter-branch 從尚有報告的 commit 起改寫歷史，「新增作業報告草稿」的 commit 因此變成空的並被移除，再以 --force-with-lease 強制推送
+- 使用者決定：改寫歷史並強制推送
+- 檢查：
+  - [N9 publish][通過] 推送後重新抓取遠端，遠端歷史中含有報告檔案的 commit 為 0 筆，本機報告檔案保留
+- 異動頁面：wiki/log.md（git 歷史）
+
+## [2026-11-23 17:59] slides | 套用蠟筆插畫風格到 21 頁（N7、N8）
+
+- 摘要：依使用者新提供的蠟筆插畫參考圖（含 MistLaneStudio 浮水印，只參考風格），先做 2 頁樣張經使用者確認，再套用到 21 頁與首頁：紙張紋理、蠟筆質感圖表、網點圓、粗顆粒蠟筆小插圖、票根、收據式表格、各段手寫英文大字
+- 使用者決定：字體組合 H5 思源宋體、S1 思源黑體、B1 Caveat Brush、T1 Special Elite、R4 霞鶩文楷（收據中文）、L1 Caveat Brush（圖表標籤）；票根文字由 ADMIT ONE 改為和主題相關的 ONE SAMPLE ONLY
+- 暫定、待使用者確認：英文大字粗細（B1 或 B1a 到 B4b）、紅色易錯筆記與「母體」標籤先用霞鶩文楷保留手寫感
+- 檢查：
+  - [N8 verify][不通過] 第 7、16、17 頁的數線、信賴區間、寬度線條全部消失；原因是手繪抖動濾鏡以物件外框計算範圍，水平線高度為 0 → 濾鏡改用 userSpaceOnUse 範圍
+  - [N8 verify][不通過] 封面票根蓋住小標 → 隱藏封面小標並下移內容
+  - [N8 verify][通過] 重新截圖 21 頁與首頁，圖表、數學式、模擬與小插圖都正常
+- 異動頁面：lessons/sampling-clt-ci/index.html、index.html
