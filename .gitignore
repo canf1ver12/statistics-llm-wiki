@@ -9,3 +9,6 @@ __pycache__/
 
 # Theme reference images from the user (source unknown, not for publishing)
 assets/
+
+# Assignment report is submitted separately, not published
+docs/assignment-report.md
