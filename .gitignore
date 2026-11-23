@@ -1,0 +1,8 @@
+# Course materials are copyrighted (Cengage / lecturer); keep them out of the public repo
+raw/
+
+# Local tooling
+.venv/
+__pycache__/
+.DS_Store
+.obsidian/
