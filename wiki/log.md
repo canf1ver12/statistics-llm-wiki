@@ -157,3 +157,11 @@
   - [N4 lint][通過] 修正後重跑全部通過
 - 其他：AGENTS.md 本身有 6 個中文句號，lint 只檢查 wiki/ 所以沒抓到 → 一併修正；AGENTS.md 和 CLAUDE.md 的寫作風格雖然不在第 6 節的適用範圍，仍保持一致
 - 異動頁面：wiki/sources/notes.md、wiki/sources/ch6.md、wiki/concepts/ 下 14 個概念頁、wiki/index.md、AGENTS.md
+
+## [2026-11-23 14:46] schema | 移除學校名稱並改寫 git 歷史
+
+- 摘要：推上 GitHub 後，使用者要求移除學校名稱，AGENTS.md 一處、Wiki 兩處（量身高的例子）改成不指名的說法
+- 使用者決定：改寫 git 歷史並強制推送，不只是新增一個 commit，讓舊 commit 也看不到學校名稱
+- 檢查：
+  - [N9 publish][不通過] 推送前只檢查了密碼、email 和教授姓名，沒有把學校名稱當作要確認的個人資訊 → 重建 docs(schema)、docs(wiki) 兩個 commit 後用 --force-with-lease 推送，確認遠端歷史中學校名稱（中英文）為 0 筆
+- 異動頁面：AGENTS.md、wiki/concepts/random-sampling.md、wiki/sources/notes.md
