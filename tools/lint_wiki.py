@@ -8,6 +8,7 @@ Checks:
   index     wiki pages not listed in index.md
   citation  concept-page lines with content but no source citation or 補充說明 marker
   style     Chinese full stop, emoji, and Mainland-Chinese terms
+            (also applied to AGENTS.md, CLAUDE.md, README.md and docs/*.md)
 
 Judgement checks (page numbers, formula correctness, contradictions) are done
 by reading, not by this script. Exit code is 1 when any check fails.
@@ -130,7 +131,7 @@ def check_style(pages: list[str]) -> list[str]:
     for page in pages:
         text = open(page, encoding="utf-8").read()
         for number, line in enumerate(text.splitlines(), 1):
-            if "。" in line:
+            if "。" in line and "「。」" not in line:  # the style rule itself quotes 。
                 problems.append(f"{page}:{number}: Chinese full stop")
             if EMOJI_RE.search(line):
                 problems.append(f"{page}:{number}: emoji")
@@ -141,6 +142,14 @@ def check_style(pages: list[str]) -> list[str]:
     return problems
 
 
+def extra_docs() -> list[str]:
+    """Project docs outside wiki/ that follow the same writing style (style check only)."""
+    docs = ["AGENTS.md", "CLAUDE.md", "README.md"]
+    if os.path.isdir("docs"):
+        docs += [os.path.join("docs", f) for f in sorted(os.listdir("docs")) if f.endswith(".md")]
+    return [d for d in docs if os.path.exists(d)]
+
+
 def main() -> None:
     pages = wiki_pages()
     link_problems, inbound = check_links(pages)
@@ -149,7 +158,7 @@ def main() -> None:
         "orphans": check_orphans(pages, inbound),
         "index": check_index(pages),
         "citation": check_citations(pages),
-        "style": check_style(pages),
+        "style": check_style(pages + extra_docs()),
     }
     failed = False
     for name, problems in results.items():
