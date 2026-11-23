@@ -25,7 +25,8 @@
 │   ├── sources/         # 每份來源一頁摘要
 │   ├── concepts/        # 概念頁
 │   └── outputs/         # query 的產出，例如簡報大綱
-├── slides/              # HTML 簡報（GitHub Pages 發布）
+├── index.html           # 講義目錄，每份簡報一張卡片（GitHub Pages 首頁）
+├── lessons/<slug>/      # 每份簡報一個資料夾，內含單一 index.html
 └── tools/               # 讀取 PDF 用的小工具
 ```
 
@@ -199,7 +200,7 @@ flowchart TD
 
 ### 產生簡報（N7 到 N9）
 
-1. **N7**：依確認後的大綱產生 `slides/index.html`，內容只能來自 Wiki，不能另外加入 Wiki 裡沒有的事實
+1. **N7**：依確認後的大綱產生 `lessons/<slug>/index.html`，並在根目錄 `index.html` 加上一張講義卡片；架構參考 diveai-lessons（16:9 投影片、方向鍵翻頁、底部頁點），顏色和字體集中在檔案開頭的 CSS 變數，內容只能來自 Wiki，不能另外加入 Wiki 裡沒有的事實
 2. **N8 簡報驗證**
    - 每張投影片的公式、數字、例子都和對應的 Wiki 頁面一致
    - 每張投影片都標出對應的 Wiki 頁面（放在頁尾或備註）
