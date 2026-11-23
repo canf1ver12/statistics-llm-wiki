@@ -42,7 +42,9 @@
 
 ## 產出 (Outputs)
 
-（尚無頁面）
+| 頁面 | 一行摘要 |
+|---|---|
+| [slides-outline](outputs/slides-outline.md) | 教學簡報 21 張投影片的大綱，每張標出對應的 Wiki 頁面，附 N6 對應檢查紀錄 |
 
 ## 待展開
 
