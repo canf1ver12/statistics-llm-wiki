@@ -824,9 +824,12 @@ slides.forEach((s, k) => { const w = WORDS[k + 1]; if (w) s.insertAdjacentHTML("
   text(s, 210, 292, "母體", { size: 32, fill: css("--peri"), font: css("--note") }).setAttribute("font-weight", 700);
   el("path", { d: body, fill: "none", stroke: css("--peri"), "stroke-width": 6, "stroke-linejoin": "round" }, s);
   el("rect", { x: 136, y: 78, width: 148, height: 46, rx: 10, fill: css("--mustard") }, s);
+  // Enclose the sample: pale dish plus a dashed loop so it reads as one drawn sample
+  el("ellipse", { cx: 386, cy: 452, rx: 50, ry: 42, fill: "#fbf8f1", opacity: .9 }, s);
+  el("ellipse", { cx: 386, cy: 452, rx: 50, ry: 42, fill: "none", stroke: css("--ink"), "stroke-width": 2.5, "stroke-dasharray": "7 5" }, s);
   [[372, 430, 0], [396, 446, 2], [384, 470, 3], [408, 472, 1], [360, 462, 4]].forEach(([x, y, c]) => el("circle", { cx: x, cy: y, r: 13, fill: colors[c] }, s));
-  text(s, 388, 412, "樣本", { size: 24, fill: css("--ink"), font: css("--note") });
-  el("path", { d: "M352 420 q-14 6 -22 20", fill: "none", stroke: css("--ink"), "stroke-width": 2 }, s);
+  text(s, 404, 386, "樣本", { size: 24, fill: css("--ink"), font: css("--note") });
+  el("path", { d: "M398 392 q-2 8 -8 16", fill: "none", stroke: css("--ink"), "stroke-width": 2 }, s);
 })();
 
 // ?autorun runs both simulations once on load (used for screenshot checks)
