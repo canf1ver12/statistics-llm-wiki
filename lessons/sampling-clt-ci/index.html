@@ -65,10 +65,15 @@ table{border-collapse:collapse;width:100%;font-size:1.25cqw;font-family:var(--ty
 th,td{border-bottom:.12cqw dashed var(--line);padding:.5cqw .9cqw;text-align:left}
 th{font-weight:400;color:var(--tomato);letter-spacing:.04em}
 
+.slide{counter-reset:step}
 .flow{display:flex;align-items:stretch;gap:.8cqw;flex-wrap:wrap}
-.flow .box{flex:1;background:var(--grain),var(--paper);padding:.9cqw 1cqw;font-weight:700;font-size:1.3cqw;box-shadow:.2cqw .3cqw .6cqw rgba(38,34,31,.12);
-  border-top:.5cqw solid transparent;border-image:var(--swipe) 30 stretch}
-.flow .box > span{display:block;font-weight:400;color:var(--muted);font-size:1.1cqw}
+/* flow boxes = cover-style tickets: small header row, solid rules, typewriter text */
+.flow .box{flex:1;counter-increment:step;background:var(--grain),var(--paper);padding:.8cqw 1.1cqw 1cqw;box-shadow:.2cqw .3cqw .6cqw rgba(38,34,31,.15);
+  font-family:var(--type-face),var(--receipt);font-size:1.35cqw;font-weight:400;letter-spacing:.03em}
+.flow .box::before{content:"STEP " counter(step,decimal-leading-zero);display:block;font-size:.85cqw;letter-spacing:.08em;
+  padding-bottom:.35cqw;margin-bottom:.45cqw;border-bottom:.12cqw solid var(--ink)}
+.flow .box:nth-child(4n+1){transform:rotate(-1deg)}.flow .box:nth-child(4n+3){transform:rotate(.8deg)}
+.flow .box > .d{display:block;color:var(--muted);font-size:1.05cqw;margin-top:.45cqw;padding-top:.4cqw;border-top:.12cqw solid var(--ink)}
 .flow .arrow{align-self:center;color:var(--tomato);font-family:var(--brush);font-size:2.2cqw}
 .big{font-size:2cqw}
 .chart{width:100%;height:100%;display:block;overflow:visible}
@@ -261,10 +266,10 @@ a{color:var(--tomato)}
   <div class="kicker">第二部分：抽樣分配與中央極限定理</div>
   <h2>抽樣分配：如果抽 500 次</h2>
   <div class="flow">
-    <div class="box">抽 30 人<span>從 2,500 位經理</span></div><div class="arrow">→</div>
-    <div class="box">算 $\bar{x}$<span>得到一個平均年薪</span></div><div class="arrow">→</div>
-    <div class="box">重複 500 次<span>得到 500 個 $\bar{x}$</span></div><div class="arrow">→</div>
-    <div class="box">畫直方圖<span>呈現鐘形</span></div>
+    <div class="box">抽 30 人<span class="d">從 2,500 位經理</span></div><div class="arrow">→</div>
+    <div class="box">算 $\bar{x}$<span class="d">得到一個平均年薪</span></div><div class="arrow">→</div>
+    <div class="box">重複 500 次<span class="d">得到 500 個 $\bar{x}$</span></div><div class="arrow">→</div>
+    <div class="box">畫直方圖<span class="d">呈現鐘形</span></div>
   </div>
   <div class="row c2w grow">
     <div style="display:flex;flex-direction:column;gap:.4cqw">
@@ -368,10 +373,10 @@ a{color:var(--tomato)}
   <div class="kicker">第三部分：信賴區間</div>
   <h2>例子：Lloyd's 百貨的顧客平均花費</h2>
   <div class="flow">
-    <div class="box">已知<span>σ = 20、n = 100</span></div><div class="arrow">→</div>
-    <div class="box">標準誤差<span>$20/\sqrt{100} = 2$</span></div><div class="arrow">→</div>
-    <div class="box">邊際誤差<span>$1.96 \times 2 = 3.92$</span></div><div class="arrow">→</div>
-    <div class="box">區間<span>$82 \pm 3.92$</span></div>
+    <div class="box">已知<span class="d">σ = 20、n = 100</span></div><div class="arrow">→</div>
+    <div class="box">標準誤差<span class="d">$20/\sqrt{100} = 2$</span></div><div class="arrow">→</div>
+    <div class="box">邊際誤差<span class="d">$1.96 \times 2 = 3.92$</span></div><div class="arrow">→</div>
+    <div class="box">區間<span class="d">$82 \pm 3.92$</span></div>
   </div>
   <div class="card hi"><p class="big">最近一週 $\bar{x} = 82$，95% 信賴區間是 78.08 到 85.92</p>
     <p>有 95% 的信心，這個區間包含所有顧客的平均花費 $\mu$</p></div>
@@ -451,14 +456,14 @@ a{color:var(--tomato)}
   <div class="kicker">收尾</div>
   <h2>總結：一條概念鏈</h2>
   <div class="flow">
-    <div class="box">隨機抽樣<span>抽一個有代表性的樣本</span></div><div class="arrow">→</div>
-    <div class="box">點估計<span>用 $\bar{x}$ 猜 $\mu$</span></div><div class="arrow">→</div>
-    <div class="box">抽樣分配<span>$\bar{x}$ 每次都不一樣</span></div>
+    <div class="box">隨機抽樣<span class="d">抽一個有代表性的樣本</span></div><div class="arrow">→</div>
+    <div class="box">點估計<span class="d">用 $\bar{x}$ 猜 $\mu$</span></div><div class="arrow">→</div>
+    <div class="box">抽樣分配<span class="d">$\bar{x}$ 每次都不一樣</span></div>
   </div>
   <div class="flow">
-    <div class="box">中央極限定理<span>$\bar{x}$ 近似常態</span></div><div class="arrow">→</div>
-    <div class="box">標準誤差<span>$\sigma/\sqrt{n}$，n 越大越準</span></div><div class="arrow">→</div>
-    <div class="box">信賴區間<span>$\bar{x} \pm z_{\alpha/2}\,\sigma/\sqrt{n}$</span></div>
+    <div class="box">中央極限定理<span class="d">$\bar{x}$ 近似常態</span></div><div class="arrow">→</div>
+    <div class="box">標準誤差<span class="d">$\sigma/\sqrt{n}$，n 越大越準</span></div><div class="arrow">→</div>
+    <div class="box">信賴區間<span class="d">$\bar{x} \pm z_{\alpha/2}\,\sigma/\sqrt{n}$</span></div>
   </div>
   <div class="callout">只抽一次樣本，我們說不出 μ 的確切值，但可以說出「有 95% 的信心，μ 落在這個範圍」</div>
 </section>
