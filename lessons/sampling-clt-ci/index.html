@@ -59,21 +59,28 @@ ul.list li::marker{color:var(--tomato)}
 .callout.warn .katex{color:var(--tomato)}
 .tag{display:inline-block;font-family:var(--type-face),monospace;font-size:.9cqw;padding:.05cqw .7cqw;background:var(--accent2-soft);margin-left:.5cqw;vertical-align:middle;transform:rotate(-3deg)}
 
-/* tables = receipts */
-table{border-collapse:collapse;width:100%;font-size:1.25cqw;font-family:var(--type-face),var(--receipt);background:var(--grain),var(--paper);
-  box-shadow:.2cqw .35cqw .7cqw rgba(38,34,31,.14);transform:rotate(.3deg)}
-th,td{border-bottom:.12cqw dashed var(--line);padding:.5cqw .9cqw;text-align:left}
-th{font-weight:400;color:var(--tomato);letter-spacing:.04em}
+/* tables = thermal till receipts: the script wraps each table in .rs > .rcpt and adds the header and footer lines */
+table{border-collapse:collapse;width:100%;font-size:1.2cqw;font-family:var(--type-face),var(--receipt)}
+th,td{border-bottom:.12cqw dashed var(--muted);padding:.28cqw .9cqw;text-align:left}
+th{font-weight:400;color:var(--ink);border-bottom:.15cqw solid var(--ink);letter-spacing:.04em}
+.rs{width:100%;filter:drop-shadow(.2cqw .35cqw .4cqw rgba(38,34,31,.18))}
+.slide > .rs{width:88%;align-self:center}
+.rcpt{background:var(--grain),#fffdf8;padding:1cqw 2cqw 1.3cqw;-webkit-mask:linear-gradient(#000 0 0) center/100% calc(100% - 1.2cqw) no-repeat,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/1.2cqw .6cqw repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/1.2cqw .6cqw repeat-x;mask:linear-gradient(#000 0 0) center/100% calc(100% - 1.2cqw) no-repeat,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/1.2cqw .6cqw repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/1.2cqw .6cqw repeat-x}
+.rs{position:relative}
+.tape{position:absolute;z-index:3;width:7cqw;height:1.8cqw;background:var(--grain),rgba(227,189,82,.6);pointer-events:none}
+.rcpt .rh{text-align:center;font-family:var(--type-face),monospace;letter-spacing:.2em;font-size:1.2cqw}
+.rcpt .rsub{display:flex;justify-content:space-between;font-family:var(--type-face),monospace;font-size:.85cqw;color:var(--muted);margin-bottom:.1cqw}
+.rcpt .rf{display:flex;align-items:center;justify-content:space-between;gap:2cqw;margin-top:.5cqw;font-family:var(--type-face),monospace;font-size:.85cqw;letter-spacing:.18em;color:var(--muted)}
+.rcpt .bar{height:1.4cqw;width:14cqw;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,#0000 2px 4px,var(--ink) 4px 5px,#0000 5px 8px,var(--ink) 8px 11px,#0000 11px 12px,var(--ink) 12px 13px,#0000 13px 17px)}
 
 .slide{counter-reset:step}
 .flow{display:flex;align-items:stretch;gap:.8cqw;flex-wrap:wrap}
-/* flow boxes = cover-style tickets: small header row, solid rules, typewriter text */
-.flow .box{flex:1;counter-increment:step;background:var(--grain),var(--paper);padding:.8cqw 1.1cqw 1cqw;box-shadow:.2cqw .3cqw .6cqw rgba(38,34,31,.15);
-  font-family:var(--type-face),var(--receipt);font-size:1.35cqw;font-weight:400;letter-spacing:.03em}
-.flow .box::before{content:"STEP " counter(step,decimal-leading-zero);display:block;font-size:.85cqw;letter-spacing:.08em;
-  padding-bottom:.35cqw;margin-bottom:.45cqw;border-bottom:.12cqw solid var(--ink)}
+/* flow boxes = crayon patches like the cards (patch drawn by drawPatches), STEP label in brush lettering */
+.flow .box{flex:1;counter-increment:step;position:relative;isolation:isolate;padding:1cqw 1.4cqw 1.1cqw;font-size:1.35cqw;font-weight:700}
+.flow .box > .patch{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible;pointer-events:none}
+.flow .box::before{content:"STEP " counter(step,decimal-leading-zero);display:block;font-family:var(--brush);font-weight:400;font-size:1.3cqw;color:var(--tomato);transform:rotate(-3deg);transform-origin:left;margin-bottom:.15cqw}
 .flow .box:nth-child(4n+1){transform:rotate(-1deg)}.flow .box:nth-child(4n+3){transform:rotate(.8deg)}
-.flow .box > .d{display:block;color:var(--muted);font-size:1.05cqw;margin-top:.45cqw;padding-top:.4cqw;border-top:.12cqw solid var(--ink)}
+.flow .box > .d{display:block;color:var(--ink);font-weight:400;font-size:1.15cqw;margin-top:.35cqw}
 .flow .arrow{align-self:center;color:var(--tomato);font-family:var(--brush);font-size:2.2cqw}
 .big{font-size:2cqw}
 .chart{width:100%;height:100%;display:block;overflow:visible}
@@ -109,6 +116,21 @@ a{color:var(--tomato)}
 .dots div.on{background:var(--tomato);width:20px;border-radius:4px}
 .nav a{font-family:var(--type-face),monospace;font-size:13px;color:var(--muted);text-decoration:none}
 @media (max-width:640px){.dots{display:none}}
+
+/* slide 3: jar (population) vs dish (sample) */
+.jarcmp{display:grid;grid-template-columns:1fr 1fr;gap:3cqw;padding:0 1cqw}
+.jc{display:grid;grid-template-columns:15cqw 1fr;gap:1.6cqw;align-items:center}
+.jc svg{width:15cqw;height:15cqw}
+.jc h3{font-size:1.6cqw}.jc h3.pop{color:var(--peri)}.jc h3.smp{color:var(--tomato)}
+ul.sym{list-style:none;display:grid;grid-template-columns:auto auto;column-gap:1.2cqw;justify-content:start;font-size:1.25cqw}
+ul.sym li{display:contents}ul.sym b{font-size:1.8cqw;font-weight:400}
+.jn{font-size:1.1cqw;color:var(--muted);margin-top:.3cqw}
+
+/* slide 5: key boxes */
+.keytag{font-family:var(--brush);font-size:1.6cqw;color:var(--tomato);transform:rotate(-3deg);display:inline-block}
+#normalInteractive text{filter:none !important}
+.keyh{font-size:1.9cqw !important;font-weight:900;margin:.1cqw 0 .3cqw}.keyh.small2{font-size:1.6cqw !important}
+.card.compact{padding:1.1cqw 1.5cqw;font-size:1.2cqw}.card.compact .keytag{font-size:1.3cqw}
 </style>
 </head>
 <body>
@@ -147,14 +169,10 @@ a{color:var(--tomato)}
 <section class="slide" data-wiki="concepts/parameter-and-statistic.md concepts/random-sampling.md concepts/notation.md">
   <div class="kicker">第一部分：基本工具</div>
   <h2>想知道的叫母體參數，手上有的叫樣本統計量</h2>
-  <table>
-    <tr><th></th><th>母體（想知道的）</th><th>樣本（手上有的）</th></tr>
-    <tr><td>資料個數</td><td>$N$</td><td>$n$</td></tr>
-    <tr><td>平均數</td><td>$\mu$</td><td>$\bar{x}$</td></tr>
-    <tr><td>變異數</td><td>$\sigma^2$</td><td>$s^2$</td></tr>
-    <tr><td>標準差</td><td>$\sigma$</td><td>$s$</td></tr>
-    <tr><td>特性</td><td>固定的數字，但通常不知道</td><td>算得出來，但每次抽樣都不一樣</td></tr>
-  </table>
+  <div class="jarcmp">
+    <div class="jc"><svg class="chart" id="popJar" viewBox="0 0 300 300" aria-label="裝滿彩色小球的罐子代表母體"></svg><div><h3 class="pop">母體（想知道的）</h3><ul class="sym"><li><span>資料個數</span><b>$N$</b></li><li><span>平均數</span><b>$\mu$</b></li><li><span>變異數</span><b>$\sigma^2$</b></li><li><span>標準差</span><b>$\sigma$</b></li></ul><p class="jn">固定的數字，但通常不知道</p></div></div>
+    <div class="jc"><svg class="chart" id="smpDish" viewBox="0 0 300 300" aria-label="一小碟彩色小球代表樣本"></svg><div><h3 class="smp">樣本（手上有的）</h3><ul class="sym"><li><span>資料個數</span><b>$n$</b></li><li><span>平均數</span><b>$\bar{x}$</b></li><li><span>變異數</span><b>$s^2$</b></li><li><span>標準差</span><b>$s$</b></li></ul><p class="jn">算得出來，但每次抽樣都不一樣</p></div></div>
+  </div>
   <div class="row c2">
     <div class="card hi"><h3>用樣本猜母體</h3><p>$\bar{x}$ 是 $\mu$ 的點估計量，$s^2$ 是 $\sigma^2$ 的點估計量</p></div>
     <div class="card"><h3>隨機抽樣的條件</h3><p>每個可能的樣本被抽中的機率相同，每個元素獨立選取，而且和母體同分配（iid）</p></div>
@@ -183,23 +201,19 @@ a{color:var(--tomato)}
 <section class="slide" data-wiki="concepts/normal-distribution.md">
   <div class="kicker">第一部分：基本工具</div>
   <h2>工具二：常態分配</h2>
-  <div class="row c2 grow">
-    <div style="display:flex;flex-direction:column;gap:1cqw">
-      <ul class="list">
-        <li>由 $\mu$ 和 $\sigma$ 決定：$\mu$ 決定位置，$\sigma$ 決定寬度</li>
-        <li>左右對稱，平均數 = 中位數 = 眾數</li>
-        <li>機率是曲線下的面積，總面積為 1</li>
-        <li>單一點的機率為 0，所以有沒有等號機率都一樣</li>
-      </ul>
+  <div class="row grow" style="grid-template-columns:.62fr 1.38fr">
+    <div style="display:flex;flex-direction:column;gap:1.3cqw">
+      <div class="card hi compact"><div class="keytag">最重要</div><h3 class="keyh">機率 = 曲線下的面積</h3><p>總面積為 1；單一點的機率為 0，所以有沒有等號機率都一樣</p></div>
+      <div class="card compact"><h3 class="keyh small2">左右對稱</h3><p>平均數 = 中位數 = 眾數</p></div>
       <div class="callout warn">常見誤解：曲線的高度不是機率，面積才是</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:.6cqw">
-      <svg class="chart grow" id="normalInteractive" viewBox="0 0 500 260" aria-label="可調整的常態分配曲線"></svg>
+      <svg class="chart grow" id="normalInteractive" viewBox="0 0 500 285" aria-label="可調整的常態分配曲線"></svg>
       <div class="controls">
         <label>$\mu$ <input type="range" id="muRange" min="-3" max="3" step="0.5" value="0"> <span id="muVal">0</span></label>
-        <label>$\sigma$ <input type="range" id="sdRange" min="0.5" max="2" step="0.25" value="1"> <span id="sdVal">1</span></label>
+        <label>$\sigma$ <input type="range" id="sdRange" min="0.75" max="2" step="0.25" value="1"> <span id="sdVal">1</span></label>
       </div>
-      <p class="sim-note">淺色虛線是 $\mu = 0$、$\sigma = 1$ 的曲線，拖動滑桿比較</p>
+      <p class="sim-note">拖動滑桿，看 $\mu$ 和 $\sigma$ 怎麼改變曲線；淺色虛線是 $\mu = 0$、$\sigma = 1$ 的曲線</p>
     </div>
   </div>
 </section>
@@ -494,6 +508,26 @@ a{color:var(--tomato)}
 </div>
 
 <script>
+// Tables become till receipts: wrap each one, add a header naming what the table lists and a footer with a barcode,
+// and tape a few of them down with yellow masking tape (fixed seed, so the same tables get tape every time)
+const RECEIPT_HEAD = { 6: "EMPIRICAL RULE", 8: "POINT ESTIMATES", 12: "HOW LARGE IS n", 13: "STANDARD ERROR",
+  15: "CONFIDENCE LEVELS", 17: "INTERVAL WIDTH", 19: "COMMON MISTAKES" };
+const tapeRng = rng(77), tables = [...document.querySelectorAll(".slide table")];
+const taped = new Set(tables.map((_, i) => i).sort(() => tapeRng() - .5).slice(0, 3));
+tables.forEach((t, ti) => {
+  const n = [...document.querySelectorAll(".slide")].indexOf(t.closest(".slide")) + 1;
+  const outer = document.createElement("div"), inner = document.createElement("div");
+  outer.className = "rs"; inner.className = "rcpt";
+  t.parentNode.insertBefore(outer, t); outer.appendChild(inner);
+  inner.insertAdjacentHTML("beforeend", `<div class="rh">${RECEIPT_HEAD[n] || "STATS NOTES"}</div><div class="rsub"><span>STATS NOTES</span><span>No. ${String(n).padStart(2, "0")}</span></div>`);
+  inner.appendChild(t);
+  inner.insertAdjacentHTML("beforeend", `<div class="rf"><span>ONE SAMPLE ONLY</span><div class="bar"></div></div>`);
+  if (taped.has(ti)) {
+    const a = Math.round(18 + tapeRng() * 14), both = tapeRng() < .5;
+    outer.insertAdjacentHTML("beforeend", (tapeRng() < .5 || both ? `<div class="tape" style="left:-1.8cqw;top:-.5cqw;transform:rotate(-${a}deg)"></div>` : "") +
+      (both || !outer.querySelector(".tape") ? `<div class="tape" style="right:-1.8cqw;top:-.5cqw;transform:rotate(${a}deg)"></div>` : ""));
+  }
+});
 const WIKI = "https://github.com/canf1ver12/statistics-llm-wiki/blob/main/wiki/";
 const slides = [...document.querySelectorAll(".slide")];
 const dots = document.getElementById("dots");
@@ -607,12 +641,32 @@ function drawNormal() {
   const m = +document.getElementById("muRange").value, s = +document.getElementById("sdRange").value;
   document.getElementById("muVal").textContent = m;
   document.getElementById("sdVal").textContent = s;
-  const sx = x => 20 + (x + 7) / 14 * 460, sy = y => 225 - y / pdf(0, 0, 0.5) * 200;
+  const sx = x => 20 + (x + 7) / 14 * 460, sy = y => 225 - y / pdf(0, 0, 0.75) * 205;
   el("path", { d: curvePath(0, 1, -7, 7, sx, sy), fill: "none", stroke: css("--band2"), "stroke-dasharray": "5 5", "stroke-width": 2 }, svg);
   el("path", { d: curvePath(m, s, -7, 7, sx, sy) + `L${sx(7)},225L${sx(-7)},225Z`, fill: css("--accent-soft"), stroke: css("--accent"), "stroke-width": 3 }, svg);
   el("line", { x1: sx(m), y1: sy(pdf(m, m, s)), x2: sx(m), y2: 225, stroke: css("--accent"), "stroke-dasharray": "3 3" }, svg);
   el("line", { x1: 20, y1: 225, x2: 480, y2: 225, stroke: css("--line") }, svg);
   for (let x = -6; x <= 6; x += 2) text(svg, sx(x), 245, x, { size: 12 });
+  // mu: centre line continues below the axis to a tag
+  el("line", { x1: sx(m), y1: 250, x2: sx(m), y2: 256, stroke: css("--accent"), "stroke-dasharray": "3 3" }, svg);
+  tag(svg, sx(m), 272, "μ 決定位置", "#eab1b1", css("--tomato"));
+  // sigma: double arrow one sigma either side of the centre, tag just below it
+  const yS = sy(pdf(m + s, m, s)), x0 = sx(m - s), x1 = sx(m + s);
+  el("path", { d: `M${x0} ${yS} H${x1} M${x0 + 8} ${yS - 5} L${x0} ${yS} L${x0 + 8} ${yS + 5} M${x1 - 8} ${yS - 5} L${x1} ${yS} L${x1 - 8} ${yS + 5}`,
+    fill: "none", stroke: css("--peri"), "stroke-width": 3, "stroke-linecap": "round" }, svg);
+  // tag sits outside the curve, right of the arrow, or left of it when there is no room on the right
+  const sw = tagWidth("σ 決定寬度");
+  tag(svg, x1 + 10 + sw / 2 <= 495 - sw / 2 ? x1 + 10 + sw / 2 : x0 - 10 - sw / 2, yS + 6, "σ 決定寬度", "#dfe0f2", "#5a5fa8");
+}
+// Label with a solid coloured background; width estimated from the characters (hidden slides have no layout for getBBox)
+const tagWidth = (str, size = 15) => [...str].reduce((a, ch) => a + (ch.charCodeAt(0) < 0x2e80 ? size * .6 : size), 0) + 16;
+// Crayon patch like the cards: a jittered box filled with a pale colour, dark text on top
+function tag(svg, x, y, str, bg, fg, size = 15) {
+  const w = tagWidth(str, size) + 6, h = size + 14, x0 = x - w / 2, y0 = y - size - 5, r = rng(Math.round(x * 7 + y));
+  const pts = [], edge = (ax, ay, bx, by, nx, ny) => { for (let k = 0; k < 4; k++) { const t = k / 4, j = (r() - .5) * 4; pts.push([ax + (bx - ax) * t + nx * j, ay + (by - ay) * t + ny * j]); } };
+  edge(x0, y0, x0 + w, y0, 0, -1); edge(x0 + w, y0, x0 + w, y0 + h, 1, 0); edge(x0 + w, y0 + h, x0, y0 + h, 0, 1); edge(x0, y0 + h, x0, y0, -1, 0);
+  el("path", { d: "M" + pts.map(p => p.map(v => v.toFixed(1)).join(",")).join("L") + "Z", fill: bg, class: "tagbg" }, svg);
+  text(svg, x, y, str, { size, fill: fg, font: css("--hand") }).setAttribute("font-weight", 700);
 }
 ["muRange", "sdRange"].forEach(id => document.getElementById(id).addEventListener("input", drawNormal));
 drawNormal();
@@ -837,6 +891,23 @@ slides.forEach((s, k) => { const w = WORDS[k + 1]; if (w) s.insertAdjacentHTML("
   text(s, 404, 386, "樣本", { size: 24, fill: css("--ink"), font: css("--note") });
   el("path", { d: "M398 392 q-2 8 -8 16", fill: "none", stroke: css("--ink"), "stroke-width": 2 }, s);
 })();
+// Slide 3: jar of balls (population) next to a small dish (sample)
+(function () {
+  const cs = [css("--tomato"), css("--pink"), css("--peri"), css("--mustard"), css("--leaf")], r = rng(5);
+  const j = document.getElementById("popJar");
+  const body = "M110 40 h80 v18 q40 8 44 44 v150 q0 30 -30 30 h-128 q-30 0 -30 -30 v-150 q4 -36 44 -44 z";
+  el("path", { d: body, fill: css("--peri"), opacity: .12 }, j);
+  const cp = el("clipPath", { id: "popJarClip" }, j); el("path", { d: body }, cp);
+  const g = el("g", { "clip-path": "url(#popJarClip)" }, j);
+  // 7 columns, odd rows shifted half a ball; start so the pattern is centered on the jar (x = 150)
+  for (let row = 0; row < 7; row++) for (let col = 0; col < 7; col++) el("circle", { cx: 72 + col * 24 + (row % 2) * 12, cy: 255 - row * 22, r: 11, fill: cs[Math.floor(r() * 5)] }, g);
+  el("path", { d: body, fill: "none", stroke: css("--peri"), "stroke-width": 6, "stroke-linejoin": "round" }, j);
+  el("rect", { x: 98, y: 14, width: 104, height: 32, rx: 8, fill: css("--mustard") }, j);
+  const d = document.getElementById("smpDish");
+  el("ellipse", { cx: 150, cy: 160, rx: 120, ry: 52, fill: "#fbf8f1" }, d);
+  el("ellipse", { cx: 150, cy: 160, rx: 120, ry: 52, fill: "none", stroke: css("--ink"), "stroke-width": 3, "stroke-dasharray": "9 7" }, d);
+  [[110, 150, 0], [150, 142, 2], [190, 152, 3], [130, 174, 1], [172, 176, 4]].forEach(([x, y, c]) => el("circle", { cx: x, cy: y, r: 16, fill: cs[c] }, d));
+})();
 
 // Cute crayon illustrations (tomato, toast, apple, fried egg) for sparse pages, after the reference images
 function blobPath(cx, cy, rx, ry, r, jit = .08, n = 18) {
@@ -904,7 +975,6 @@ const ILLO = {
 };
 // [slide, type, left cqw, top cqw, width cqw, rotate deg, extra]
 const PLACES = [
-  [5, "dots", 12, 27, 22, 0], [5, "pile", 14, 26, 24, -3], [5, "dots", 33, 13, 12, 0, "peri"],
   [7, "dots", 64, 37, 13, 0, "leaf"], [7, "toast", 60, 37, 12, -8], [7, "egg", 75, 40, 11, 10],
   [10, "cherries", 84, 39, 10, 8],
   [12, "dots", 78, 18, 16, 0], [12, "apple", 80, 20, 14, 6],
@@ -927,18 +997,19 @@ PLACES.forEach(([n, type, x, y, w, rot, extra], i) => {
 const PATCH = ["#f2d4d2", "#f4e6bd", "#dfe0f2", "#e1ead3"], PATCH_HI = "#eab1b1";
 const DOTS = ["url(#dots-pink)", "url(#dots-peri)", "url(#dots-leaf)"];
 function drawPatches(slide) {
-  slide.querySelectorAll(".card").forEach(card => {
+  slide.querySelectorAll(".card, .flow .box").forEach(card => {
     const W = card.offsetWidth, H = card.offsetHeight;
     if (!W || !H) return;
     const old = card.querySelector(":scope > .patch");
     if (old && Math.abs(old.dataset.ar - W / H) < .03) return;
     if (old) old.remove();
-    const i = [...document.querySelectorAll(".card")].indexOf(card), r = rng(300 + i * 13);
+    const isBox = card.classList.contains("box");
+    const i = [...document.querySelectorAll(".card, .flow .box")].indexOf(card), r = rng(300 + i * 13);
     const svg = el("svg", { class: "patch", viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: "none", "aria-hidden": "true" });
     svg.dataset.ar = W / H;
     // halftone circle behind one corner
     const cx = i % 2 ? W * .92 : W * .08, cy = H * .88, rad = Math.min(W, H) * (.38 + r() * .12);
-    el("circle", { cx, cy, r: rad, fill: DOTS[i % DOTS.length], opacity: .8 }, svg);
+    if (!isBox) el("circle", { cx, cy, r: rad, fill: DOTS[i % DOTS.length], opacity: .8 }, svg);
     // jittered rounded rectangle walked around the perimeter
     const m = 5, pts = [], step = 22;
     const edge = (x0, y0, x1, y1, nx, ny) => {
@@ -951,7 +1022,7 @@ function drawPatches(slide) {
     el("path", { d: "M" + pts.map(p => p.map(v => v.toFixed(1)).join(",")).join("L") + "Z", fill: hi ? PATCH_HI : PATCH[i % PATCH.length], filter: "url(#crayon)" }, svg);
     // red tick marks outside two opposite corners
     const ticks = (x, y, dir) => { for (let k = 0; k < 3; k++) el("path", { d: `M${x + k * 6 * dir} ${y} l${2 * dir} -14`, fill: "none", stroke: css("--tomato"), "stroke-width": 3, "stroke-linecap": "round", filter: "url(#crayon)" }, svg); };
-    ticks(-4, 14, 1); ticks(W + 4, H + 2, -1);
+    if (!isBox) { ticks(-4, 14, 1); ticks(W + 4, H + 2, -1); }
     card.prepend(svg);
   });
 }
