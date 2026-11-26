@@ -9,32 +9,55 @@
 /* Theme tokens: keep in sync with each lesson index.html (crayon theme) */
 :root{
   --desk:#dcd7cd; --paper-bg:#f3f0e9; --paper:#fbf8f1; --ink:#26221f; --muted:#6d655e; --line:#cfc8bb;
-  --tomato:#b8483c; --pink:#d9858f; --peri:#7b80c6; --mustard:#e3bd52;
+  --tomato:#b8483c; --pink:#d9858f; --peri:#7b80c6; --mustard:#e3bd52; --leaf:#7ea457;
   --sans:"Noto Sans TC","PingFang TC",system-ui,sans-serif; --hand:"Noto Serif TC","Noto Sans TC",serif;
   --brush:"Caveat Brush",cursive; --type:"Special Elite",monospace;
+  --receipt:"Special Elite","Noto Serif TC",serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper-bg);color:var(--ink);font-family:var(--hand);line-height:1.7;padding:56px 16px;min-height:100vh}
-main{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+body{background:var(--grain,none),var(--fiber,none),var(--paper-bg);color:var(--ink);font-family:var(--hand);line-height:1.7;padding:56px 16px;min-height:100vh;overflow-x:hidden}
+main{position:relative;max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+main > *{position:relative;z-index:1}
+header{max-width:620px}
 .brand{font-family:var(--brush);font-size:56px;line-height:1;transform:rotate(-2deg);display:inline-block}
 header h1{font-family:var(--hand);font-size:32px;font-weight:900;margin-top:8px}
 header h1 span{background:linear-gradient(transparent 60%,rgba(227,189,82,.7) 60%)}
 header p{color:var(--muted);margin-top:8px}
 h2{font-family:var(--type);font-weight:400;font-size:15px;letter-spacing:.14em;color:var(--tomato)}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px;margin-top:16px}
-.card{position:relative;background:var(--paper);padding:24px;display:flex;flex-direction:column;gap:10px;box-shadow:3px 5px 14px rgba(38,34,31,.16);transform:rotate(-.8deg)}
-.tag{align-self:flex-start;font-family:var(--type);font-size:13px;padding:1px 10px;background:rgba(227,189,82,.45)}
-.card h3{font-family:var(--hand);font-size:21px;font-weight:900}
-.card p{color:var(--muted);font-size:15px}
-.meta{font-family:var(--type);font-size:13px;color:var(--muted)}
-.btn{align-self:flex-start;margin-top:auto;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:8px 20px;border-radius:999px}
-.card.soon{transform:rotate(.8deg);justify-content:center;align-items:center;color:var(--muted);font-family:var(--brush);font-size:24px;background:transparent;box-shadow:none;border:2px dashed var(--line)}
+.cards{display:grid;grid-template-columns:400px 260px;gap:28px;margin-top:16px;align-items:start}
+
+/* lesson card = receipt: typewriter rows, dotted leaders, barcode, zigzag tear at the bottom */
+.receipt{filter:drop-shadow(3px 5px 7px rgba(38,34,31,.18));transform:rotate(-.8deg)}
+.receipt .paper{background:var(--grain,none),var(--paper);padding:22px 24px 34px;font-family:var(--receipt);font-size:14px;letter-spacing:.02em;
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/18px 9px repeat-x;
+  mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/18px 9px repeat-x}
+.receipt .r{display:flex;justify-content:space-between;gap:16px;font-size:12px;color:var(--muted)}
+.receipt .head{text-align:center;font-size:19px;letter-spacing:.12em;margin:6px 0 2px}
+.receipt hr{border:0;margin:10px 0}
+.receipt hr.solid{border-top:1.5px solid var(--ink)}
+.receipt hr.dash{border-top:1.5px dashed var(--line)}
+.receipt .cat{color:var(--tomato)}
+.receipt h3{font-family:var(--hand);font-size:21px;font-weight:900;line-height:1.45;letter-spacing:0;margin:4px 0 6px}
+.receipt .desc{color:var(--muted);font-family:var(--hand);font-size:14.5px;letter-spacing:0}
+.receipt .ln{display:flex;align-items:baseline;gap:8px;margin:3px 0}
+.receipt .ln i{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px)}
+.receipt .total{font-size:17px}
+.receipt .barcode{height:38px;margin:14px auto 4px;width:78%;
+  background:repeating-linear-gradient(90deg,var(--ink) 0 2px,#0000 2px 4px,var(--ink) 4px 5px,#0000 5px 8px,var(--ink) 8px 11px,#0000 11px 12px,var(--ink) 12px 13px,#0000 13px 17px)}
+.receipt .thanks{text-align:center;font-size:12px;letter-spacing:.18em;color:var(--muted)}
+.btn{display:inline-block;margin-top:14px;background:var(--ink);color:#fff;text-decoration:none;font-family:var(--hand);font-weight:700;padding:8px 20px;border-radius:999px;letter-spacing:0}
+.soon{min-height:280px;transform:rotate(.8deg);display:flex;justify-content:center;align-items:center;color:var(--muted);font-family:var(--brush);font-size:24px;border:2px dashed var(--line)}
+
+/* illustrations: same crayon food drawings as the lesson's sparse pages */
+.illo{position:absolute;z-index:0;pointer-events:none;overflow:visible}
 footer{color:var(--muted);font-size:14px}
 footer a{color:var(--tomato)}
+@media (max-width:1279px){.illo.edge{display:none}}
+@media (max-width:720px){.illo.wide{display:none}.cards{grid-template-columns:minmax(0,400px)}}
 </style>
 </head>
 <body>
-<main>
+<main id="main">
   <header>
     <div class="brand">Stats Notes</div>
     <h1><span>統計學 LLM Wiki 講義庫</span></h1>
@@ -44,14 +67,26 @@ footer a{color:var(--tomato)}
   <section>
     <h2>LESSONS ・ 講義</h2>
     <div class="cards">
-      <article class="card">
-                <span class="tag">推論統計・入門</span>
-        <h3>只抽一次樣本，怎麼知道整個母體？</h3>
-        <p>從隨機抽樣出發，用抽樣分配和中央極限定理，一路推到信賴區間；附兩個互動模擬</p>
-        <div class="meta">21 頁・← → 翻頁・2 個互動模擬</div>
-        <a class="btn" href="lessons/sampling-clt-ci/">開始 →</a>
+      <article class="receipt">
+        <div class="paper">
+          <div class="r"><span>STATISTICS LECTURE</span><span>No. 01</span></div>
+          <div class="head">LESSON RECEIPT</div>
+          <hr class="solid">
+          <div class="cat">推論統計・入門</div>
+          <h3>只抽一次樣本，怎麼知道整個母體？</h3>
+          <p class="desc">從隨機抽樣出發，用抽樣分配和中央極限定理，一路推到信賴區間；附兩個互動模擬</p>
+          <hr class="dash">
+          <div class="ln"><span>頁數</span><i></i><span>21</span></div>
+          <div class="ln"><span>翻頁</span><i></i><span>← →</span></div>
+          <div class="ln"><span>互動模擬</span><i></i><span>2</span></div>
+          <hr class="solid">
+          <div class="ln total"><span>TOTAL</span><i></i><span>21 PAGES</span></div>
+          <a class="btn" href="lessons/sampling-clt-ci/">開始 →</a>
+          <div class="barcode" aria-hidden="true"></div>
+          <div class="thanks">ONE SAMPLE ONLY</div>
+        </div>
       </article>
-      <div class="card soon">more coming soon</div>
+      <div class="soon">more coming soon</div>
     </div>
   </section>
 
@@ -59,5 +94,113 @@ footer a{color:var(--tomato)}
     內容來源：<a href="https://github.com/canf1ver12/statistics-llm-wiki/blob/main/wiki/index.md">statistics-llm-wiki</a>，整理自課堂講義與手寫筆記
   </footer>
 </main>
+
+<script>
+// Crayon filters, halftone patterns and paper textures, copied from lessons/sampling-clt-ci/index.html
+document.body.insertAdjacentHTML("afterbegin", `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="crayon" x="-15%" y="-15%" width="130%" height="130%">
+    <feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="3" result="warp"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="7" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="8" result="grain"/>
+    <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1.5 0 0 0 1.55" result="holes"/>
+    <feComposite in="rough" in2="holes" operator="in" result="speck"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".015 .35" numOctaves="2" seed="11" result="streak"/>
+    <feColorMatrix in="streak" type="matrix" values=".3 0 0 0 .68  .3 0 0 0 .68  .3 0 0 0 .68  0 0 0 0 1" result="streakC"/>
+    <feBlend in="speck" in2="streakC" mode="multiply" result="b"/><feComposite in="b" in2="speck" operator="in"/>
+  </filter>
+  <filter id="crayon-coarse" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency=".09" numOctaves="2" seed="6" result="warp"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="7" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".42" numOctaves="2" seed="13" result="grain"/>
+    <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3 0 0 0 2.15" result="holes"/>
+    <feComposite in="rough" in2="holes" operator="in" result="speck"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".05 .6" numOctaves="2" seed="17" result="streak"/>
+    <feColorMatrix in="streak" type="matrix" values=".45 0 0 0 .55  .45 0 0 0 .55  .45 0 0 0 .55  0 0 0 0 1" result="streakC"/>
+    <feBlend in="speck" in2="streakC" mode="multiply" result="b"/><feComposite in="b" in2="speck" operator="in"/>
+  </filter>
+  <pattern id="dots-pink" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="1.5" fill="#c9737d"/></pattern>
+  <pattern id="dots-leaf" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.2" fill="#8aa765"/></pattern>
+  <pattern id="dots-peri" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.1" fill="#8f93cf"/></pattern>
+</defs></svg>`);
+const uri = svg => `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+const rootStyle = document.documentElement.style;
+rootStyle.setProperty("--grain", uri(`<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .3 0 0 0 0 .27 0 0 0 0 .22 0 0 0 .13 0'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>`));
+rootStyle.setProperty("--fiber", uri(`<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.006 .03' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55 0 0 0 0 .5 0 0 0 0 .42 0 0 0 .12 0'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>`));
+
+function rng(seed) { return () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }; }
+function blobPath(cx, cy, rx, ry, r, jit = .08, n = 18) {
+  const pts = [];
+  for (let k = 0; k < n; k++) { const a = k / n * 2 * Math.PI, f = 1 + (r() - .5) * 2 * jit; pts.push([cx + Math.cos(a) * rx * f, cy + Math.sin(a) * ry * f]); }
+  let d = `M${((pts[0][0] + pts[n - 1][0]) / 2).toFixed(1)},${((pts[0][1] + pts[n - 1][1]) / 2).toFixed(1)}`;
+  for (let k = 0; k < n; k++) { const p = pts[k], q = pts[(k + 1) % n]; d += `Q${p[0].toFixed(1)},${p[1].toFixed(1)} ${((p[0] + q[0]) / 2).toFixed(1)},${((p[1] + q[1]) / 2).toFixed(1)}`; }
+  return d + "Z";
+}
+function starPts(cx, cy, R, r) { const p = []; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, d = i % 2 ? r : R; p.push(`${(cx + d * Math.cos(a)).toFixed(1)},${(cy + d * Math.sin(a)).toFixed(1)}`); } return p.join(" "); }
+function sparkle(cx, cy, r) { const k = r * .18; return `M${cx} ${cy - r} Q${cx + k} ${cy - k} ${cx + r} ${cy} Q${cx + k} ${cy + k} ${cx} ${cy + r} Q${cx - k} ${cy + k} ${cx - r} ${cy} Q${cx - k} ${cy - k} ${cx} ${cy - r} Z`; }
+const CR = 'filter="url(#crayon)"', CC = 'filter="url(#crayon-coarse)"';
+const tickMarks = (x, y, c, dir = 1) => [0, 1, 2].map(k => `<path d="M${x + k * 7 * dir} ${y} l${3 * dir} -16" stroke="${c}" stroke-width="4" stroke-linecap="round" fill="none" ${CR}/>`).join("");
+const ILLO = {
+  dots: (r, c = "pink") => `<circle cx="100" cy="100" r="96" fill="url(#dots-${c})" opacity=".8"/>`,
+  coffee: r => `<path d="${blobPath(100, 162, 84, 18, r, .04)}" fill="#d9858f" ${CR}/>
+    <path d="M46 78 L154 78 L144 150 Q100 162 56 150 Z" fill="#7b80c6" ${CR}/>
+    <path d="M152 92 q30 2 24 28 q-6 20 -30 18" stroke="#7b80c6" stroke-width="10" fill="none" ${CR}/>
+    <path d="M78 62 q-10 -14 0 -28 q10 -14 0 -28 M112 62 q-10 -14 0 -28 q10 -14 0 -28" stroke="#b9ad9c" stroke-width="5" stroke-linecap="round" fill="none" ${CR}/>`,
+  toast: r => `<path d="${blobPath(100, 104, 92, 86, r, .05, 12)}" fill="#e2a3a8" ${CR}/>
+    <path d="M42 88 Q38 44 100 44 Q162 44 158 88 L154 160 Q100 168 46 160 Z" fill="#d79a4e" ${CR}/>
+    <path d="M56 92 Q54 60 100 60 Q146 60 144 92 L141 148 Q100 154 59 148 Z" fill="#f3dfae" ${CR}/>
+    <path d="${blobPath(98, 104, 30, 24, r, .22, 10)}" fill="#b8483c" ${CR}/>${tickMarks(8, 30, "#b8483c")}${tickMarks(192, 196, "#b8483c", -1)}`,
+  egg: r => `<path d="${blobPath(100, 100, 84, 72, r, .14, 14)}" fill="#fffdf7" stroke="#b9ad9c" stroke-width="4" ${CR}/>
+    <path d="${blobPath(92, 96, 32, 30, r, .05)}" fill="#e3bd52" ${CR}/>`,
+  lemon: r => `<path d="${blobPath(100, 100, 82, 80, r, .03)}" fill="#e3bd52" ${CR}/><path d="${blobPath(100, 100, 66, 64, r, .03)}" fill="#f6e7a6" ${CR}/>
+    ${[...Array(8)].map((_, k) => { const a = k * Math.PI / 4; return `<path d="M100 100 L${(100 + Math.cos(a) * 62).toFixed(1)} ${(100 + Math.sin(a) * 60).toFixed(1)}" stroke="#fffdf7" stroke-width="5" stroke-linecap="round" ${CR}/>`; }).join("")}`,
+  strawberry: r => `<path d="M100 178 C40 150 30 80 62 62 C80 52 120 52 138 62 C170 80 160 150 100 178 Z" fill="#c9554a" ${CR}/>
+    ${[[80, 90], [118, 88], [70, 118], [100, 112], [130, 116], [86, 142], [116, 140], [100, 162]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="3" ry="5" fill="#e3bd52"/>`).join("")}
+    <path d="M60 62 L84 50 L92 30 L104 48 L120 32 L122 52 L144 60 L116 68 L100 62 L82 70 Z" fill="#7ea457" ${CR}/>`,
+  cherries: r => `<path d="M70 130 Q80 70 104 36 M134 124 Q120 70 104 36" stroke="#7ea457" stroke-width="6" stroke-linecap="round" fill="none" ${CR}/>
+    <path d="${blobPath(126, 44, 26, 12, r, .1)}" fill="#7ea457" transform="rotate(-25 126 44)" ${CR}/>
+    <path d="${blobPath(68, 146, 32, 30, r, .06)}" fill="#b8483c" ${CR}/><path d="${blobPath(136, 140, 30, 29, r, .06)}" fill="#b8483c" ${CR}/>${tickMarks(150, 196, "#b8483c", -1)}`,
+  cookie: r => `<path d="${blobPath(100, 100, 80, 76, r, .07)}" fill="#d79a4e" ${CR}/>
+    ${[[70, 76], [118, 66], [134, 110], [88, 118], [64, 132], [112, 146], [100, 92]].map(([x, y]) => `<path d="${blobPath(x, y, 9, 8, r, .2, 8)}" fill="#6e4630"/>`).join("")}`,
+  donut: r => `<path d="${blobPath(100, 104, 80, 74, r, .04)} M100 86 a20 18 0 1 0 0.1 0 Z" fill="#d79a4e" fill-rule="evenodd" ${CR}/>
+    <path d="${blobPath(100, 100, 70, 62, r, .1)} M100 84 a22 20 0 1 0 0.1 0 Z" fill="#d9858f" fill-rule="evenodd" ${CR}/>
+    ${[[60, 80, "#7b80c6", 20], [130, 70, "#e3bd52", -30], [140, 112, "#7ea457", 40], [72, 130, "#fffdf7", -10], [110, 140, "#7b80c6", 70], [96, 64, "#7ea457", 0]].map(([x, y, c, a]) => `<path d="M${x} ${y} l10 0" stroke="${c}" stroke-width="5" stroke-linecap="round" transform="rotate(${a} ${x + 5} ${y})"/>`).join("")}`,
+  star: (r, c = "#7b80c6") => `<polygon points="${starPts(100, 106, 88, 38)}" fill="${c}" stroke="${c}" stroke-width="10" stroke-linejoin="round" ${CC}/>`,
+  starLine: (r, c = "#7ea457") => `<polygon points="${starPts(100, 106, 80, 34)}" fill="none" stroke="${c}" stroke-width="16" stroke-linejoin="round" ${CC}/>`,
+  sparkle: (r, c = "#e3bd52") => `<path d="${sparkle(100, 100, 88)}" fill="${c}" ${CC}/>`,
+  squiggle: (r, c = "#d9858f") => `<path d="M12 120 Q36 60 60 116 T108 116 T156 116 T192 100" fill="none" stroke="${c}" stroke-width="16" stroke-linecap="round" ${CC}/>`,
+};
+// Vignettes on both sides of the page; items inside one vignette belong together and overlap so each reads as one picture
+// Each vignette: [left px, top px, width px, items] relative to the 960px column; items are [type, x, y, size, rotate deg, extra] in a 200 x 200 box
+const GROUPS = [
+  [-140, 50, 115, [["dots", 10, 10, 180, 0, "leaf"], ["lemon", 30, 30, 140, -10]]],
+  [700, -10, 230, [["dots", 10, 20, 170, 0, "pink"], ["toast", 6, 18, 130, -8], ["egg", 92, 86, 100, 12]]],
+  [-150, 450, 135, [["dots", 0, 30, 170, 0, "peri"], ["coffee", 10, 20, 130, -4], ["cookie", 104, 112, 82, 14]]],
+  [735, 330, 200, [["dots", 30, 20, 150, 0, "leaf"], ["strawberry", 20, 46, 105, -10], ["cherries", 100, 30, 95, 8]]],
+  [640, 640, 150, [["dots", 20, 10, 170, 0, "pink"], ["donut", 20, 20, 150, 10]]],
+];
+const main = document.getElementById("main");
+const place = (left, top, width, body, cls) => main.insertAdjacentHTML("beforeend",
+  `<svg class="illo ${cls}" viewBox="0 0 200 200" aria-hidden="true" style="left:${left}px;top:${top}px;width:${width}px;height:${width}px">${body}</svg>`);
+const edge = (left, width) => left < 0 || left + width > 960 ? "edge" : "wide";
+GROUPS.forEach(([left, top, width, items], g) => {
+  const body = items.map(([type, x, y, w, rot, extra], i) =>
+    `<g transform="translate(${x} ${y}) rotate(${rot} ${w / 2} ${w / 2}) scale(${w / 200})">${ILLO[type](rng(900 + g * 50 + i * 17), extra)}</g>`).join("");
+  place(left, top, width, body, edge(left, width));
+});
+// Small doodles scattered in the gaps, random type / color / size / rotation from a fixed seed
+const SPOTS = [[-60, -30], [-120, 250], [-50, 340], [-90, 700], [-140, 860], [640, 6], [640, 215], [1000, 40], [1050, 250], [990, 420],
+  [1060, 580], [1010, 780], [880, 640], [920, 840], [560, 610], [560, 880], [470, 210], [-30, 610]];
+const TYPES = ["star", "starLine", "sparkle", "sparkle", "dot3", "squiggle", "plus", "ball"];
+const COLORS = ["#b8483c", "#7b80c6", "#e3bd52", "#d9858f", "#7ea457"];
+ILLO.dot3 = (r, c) => `<g fill="${c}" ${CC}><circle cx="44" cy="60" r="18"/><circle cx="116" cy="36" r="12"/><circle cx="148" cy="124" r="20"/><circle cx="68" cy="152" r="10"/></g>`;
+ILLO.plus = (r, c) => `<g stroke="${c}" stroke-width="20" stroke-linecap="round" ${CC}><path d="M100 36 V164"/><path d="M36 100 H164"/></g>`;
+ILLO.ball = (r, c) => `<circle cx="100" cy="100" r="68" fill="${c}" ${CC}/>`;
+const dr = rng(4242);
+SPOTS.forEach(([x, y]) => {
+  const type = TYPES[Math.floor(dr() * TYPES.length)], c = COLORS[Math.floor(dr() * COLORS.length)];
+  const w = type === "squiggle" ? 56 : 18 + Math.round(dr() * 16), rot = Math.round(dr() * 50 - 25);
+  place(x, y, w, `<g transform="rotate(${rot} 100 100)">${ILLO[type](dr, c)}</g>`, edge(x, w));
+});
+</script>
 </body>
 </html>
