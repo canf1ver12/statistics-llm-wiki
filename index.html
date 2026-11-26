@@ -26,25 +26,32 @@ header p{color:var(--muted);margin-top:8px}
 h2{font-family:var(--type);font-weight:400;font-size:15px;letter-spacing:.14em;color:var(--tomato)}
 .cards{display:grid;grid-template-columns:400px 260px;gap:28px;margin-top:16px;align-items:start}
 
-/* lesson card = receipt: typewriter rows, dotted leaders, barcode, zigzag tear at the bottom */
-.receipt{filter:drop-shadow(3px 5px 7px rgba(38,34,31,.18));transform:rotate(-.8deg)}
-.receipt .paper{background:var(--grain,none),var(--paper);padding:22px 24px 34px;font-family:var(--receipt);font-size:14px;letter-spacing:.02em;
-  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/18px 9px repeat-x;
-  mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/18px 9px repeat-x}
-.receipt .r{display:flex;justify-content:space-between;gap:16px;font-size:12px;color:var(--muted)}
-.receipt .head{text-align:center;font-size:19px;letter-spacing:.12em;margin:6px 0 2px}
+/* lesson card = thermal till receipt, same as the tables inside the lessons: zigzag top and bottom,
+   topic header, STATS NOTES / No. line, dashed rows, ONE SAMPLE ONLY with a barcode, yellow masking tape */
+.receipt{position:relative;filter:drop-shadow(3px 5px 7px rgba(38,34,31,.18));transform:rotate(-.8deg);transition:transform .25s ease,filter .25s ease}
+.receipt:hover{transform:translateY(-8px) rotate(-.8deg);filter:drop-shadow(6px 16px 16px rgba(38,34,31,.24))}
+@media (prefers-reduced-motion:reduce){.receipt{transition:none}}
+.receipt .paper{background:var(--grain,none),#fffdf8;padding:26px 24px 30px;font-family:var(--receipt);font-size:14px;letter-spacing:.02em;-webkit-mask:linear-gradient(#000 0 0) center/100% calc(100% - 18px) no-repeat,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/18px 9px repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/18px 9px repeat-x;mask:linear-gradient(#000 0 0) center/100% calc(100% - 18px) no-repeat,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/18px 9px repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/18px 9px repeat-x}
+.receipt .face{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none}
+.receipt .face.backside{transform:rotateX(180deg);background:var(--grain,none),#efeadf}
+.curlsheet{position:fixed;z-index:45;pointer-events:none;opacity:0;border-radius:4px;
+  background:linear-gradient(0deg,rgba(38,34,31,.22),rgba(255,255,255,.35) 2.5%,rgba(38,34,31,.06) 7%,transparent 14%),var(--grain,none),#efeadf;
+  box-shadow:0 18px 30px rgba(38,34,31,.18)}
+.receipt .rh{text-align:center;font-size:17px;letter-spacing:.2em}
+.receipt .rsub{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin:2px 0 4px}
 .receipt hr{border:0;margin:10px 0}
 .receipt hr.solid{border-top:1.5px solid var(--ink)}
-.receipt hr.dash{border-top:1.5px dashed var(--line)}
+.receipt hr.dash{border-top:1.5px dashed var(--muted)}
 .receipt .cat{color:var(--tomato)}
 .receipt h3{font-family:var(--hand);font-size:21px;font-weight:900;line-height:1.45;letter-spacing:0;margin:4px 0 6px}
 .receipt .desc{color:var(--muted);font-family:var(--hand);font-size:14.5px;letter-spacing:0}
-.receipt .ln{display:flex;align-items:baseline;gap:8px;margin:3px 0}
-.receipt .ln i{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px)}
-.receipt .total{font-size:17px}
-.receipt .barcode{height:38px;margin:14px auto 4px;width:78%;
+.receipt .ln{display:flex;align-items:baseline;gap:8px;padding:4px 0;border-bottom:1.5px dashed var(--muted)}
+.receipt .ln i{flex:1}
+.receipt .ln.total{border-top:1.5px solid var(--ink);border-bottom:0;margin-top:6px;padding-top:6px;font-size:16px}
+.receipt .rf{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:16px;font-size:11px;letter-spacing:.18em;color:var(--muted)}
+.receipt .barcode{height:26px;width:150px;
   background:repeating-linear-gradient(90deg,var(--ink) 0 2px,#0000 2px 4px,var(--ink) 4px 5px,#0000 5px 8px,var(--ink) 8px 11px,#0000 11px 12px,var(--ink) 12px 13px,#0000 13px 17px)}
-.receipt .thanks{text-align:center;font-size:12px;letter-spacing:.18em;color:var(--muted)}
+.receipt .tape{position:absolute;z-index:3;width:84px;height:22px;top:-8px;background:var(--grain,none),rgba(227,189,82,.6);pointer-events:none}
 .btn{display:inline-block;margin-top:14px;background:var(--ink);color:#fff;text-decoration:none;font-family:var(--hand);font-weight:700;padding:8px 20px;border-radius:999px;letter-spacing:0}
 .soon{min-height:280px;transform:rotate(.8deg);display:flex;justify-content:center;align-items:center;color:var(--muted);font-family:var(--brush);font-size:24px;border:2px dashed var(--line)}
 
@@ -69,22 +76,25 @@ footer a{color:var(--tomato)}
     <div class="cards">
       <article class="receipt">
         <div class="paper">
-          <div class="r"><span>STATISTICS LECTURE</span><span>No. 01</span></div>
-          <div class="head">LESSON RECEIPT</div>
+          <div class="rh">SAMPLING · CLT · CI</div>
+          <div class="rsub"><span>STATS NOTES</span><span>No. 01</span></div>
           <hr class="solid">
           <div class="cat">推論統計・入門</div>
           <h3>只抽一次樣本，怎麼知道整個母體？</h3>
           <p class="desc">從隨機抽樣出發，用抽樣分配和中央極限定理，一路推到信賴區間；附兩個互動模擬</p>
-          <hr class="dash">
-          <div class="ln"><span>頁數</span><i></i><span>21</span></div>
-          <div class="ln"><span>翻頁</span><i></i><span>← →</span></div>
-          <div class="ln"><span>互動模擬</span><i></i><span>2</span></div>
           <hr class="solid">
-          <div class="ln total"><span>TOTAL</span><i></i><span>21 PAGES</span></div>
+          <div class="ln"><span>母體與樣本</span><i></i><span>p.02–03</span></div>
+          <div class="ln"><span>常態分配</span><i></i><span>p.05–07</span></div>
+          <div class="ln"><span>抽樣分配</span><i></i><span>p.08–10</span></div>
+          <div class="ln"><span>中央極限定理</span><i></i><span>p.11–12</span></div>
+          <div class="ln"><span>標準誤差</span><i></i><span>p.13</span></div>
+          <div class="ln"><span>信賴區間</span><i></i><span>p.14–18</span></div>
+          <div class="ln total"><span>頁數</span><i></i><span>21</span></div>
           <a class="btn" href="lessons/sampling-clt-ci/index.html">開始 →</a>
-          <div class="barcode" aria-hidden="true"></div>
-          <div class="thanks">ONE SAMPLE ONLY</div>
+          <div class="rf"><span>ONE SAMPLE ONLY</span><div class="barcode" aria-hidden="true"></div></div>
         </div>
+        <div class="tape" style="left:-22px;transform:rotate(-24deg)"></div>
+        <div class="tape" style="right:-22px;transform:rotate(22deg)"></div>
       </article>
       <div class="soon">more coming soon</div>
     </div>
@@ -201,6 +211,93 @@ SPOTS.forEach(([x, y]) => {
   const w = type === "squiggle" ? 56 : 18 + Math.round(dr() * 16), rot = Math.round(dr() * 50 - 25);
   place(x, y, w, `<g transform="rotate(${rot} 100 100)">${ILLO[type](dr, c)}</g>`, edge(x, w));
 });
+
+// Transition into a lesson. The paper is soft: the receipt's bottom edge curls up (built as a chain of hinged
+// strips, lower strips bending more, so the top keeps the printed front and the bottom shows the blank back).
+// The curl then keeps rolling up over the whole screen: a full-screen sheet of the same paper unrolls from the
+// bottom edge to the top, the page fades to the lesson's desk colour, and the lesson opens (and fades in, see the
+// lesson's script).
+function stripChain(host, n, w, h, top, origin, faceHTML) {
+  const strips = [];
+  let parent = host;
+  for (let i = 0; i < n; i++) {
+    const st = document.createElement("div");
+    st.style.cssText = `position:absolute;left:0;top:${i ? (origin === "top" ? h : -h) : top}px;width:${w}px;height:${h + .7}px;transform-origin:50% ${origin === "top" ? "0" : "100%"};transform-style:preserve-3d`;
+    st.innerHTML = faceHTML(i);
+    parent.appendChild(st);
+    strips.push(st);
+    parent = st;
+  }
+  return strips;
+}
+// shade a strip by how far it has turned from facing the viewer, so the curve reads
+const shade = (st, cum) => {
+  const lit = Math.cos(cum * Math.PI / 180);
+  if (st.children[0]) st.children[0].style.filter = `brightness(${(.8 + .2 * Math.max(0, lit)).toFixed(3)})`;
+  if (st.children[1]) st.children[1].style.filter = `brightness(${(.78 + .22 * Math.max(0, -lit)).toFixed(3)})`;
+};
+const ease = x => x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+document.querySelectorAll(".receipt .btn").forEach(btn => btn.addEventListener("click", e => {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  e.preventDefault();
+  const card = btn.closest(".receipt"), href = btn.href, D = 1500;
+  card.style.transition = "none";
+  card.style.pointerEvents = "none";
+  card.style.filter = "none";                 // a filter would flatten the 3D bend
+  card.style.transformStyle = "preserve-3d";
+  card.querySelectorAll(".tape").forEach((t, i) => t.animate(
+    [{ opacity: 1 }, { opacity: 0, translate: `${i ? 40 : -40}px -50px`, rotate: `${i ? 35 : -35}deg` }],
+    { duration: 250, easing: "ease-out", fill: "forwards" }));
+
+  // 1. the receipt itself: bottom curls up toward the viewer
+  const paper = card.querySelector(".paper"), W = paper.offsetWidth, H = paper.offsetHeight, N = 16, hs = H / N;
+  const rStrips = stripChain(card, N, W, hs, paper.offsetTop, "top", i =>
+    `<div class="face front"><div class="paper" style="position:absolute;left:0;top:${-i * hs}px;width:${W}px;height:${H}px;margin:0">${paper.innerHTML}</div></div><div class="face backside"></div>`);
+  paper.style.visibility = "hidden";
+
+  // 2. the whole receipt flies toward the viewer (it grows) and up to the right, tilted, while its bottom keeps
+  //    curling up; it is aimed so the curled-up back lands in the middle of the screen and fills it.
+  //    A sheet of the same back paper fades in at the very end so the cover is complete before the lesson opens.
+  card.closest("section").style.zIndex = 40; // the section is its own stacking layer; lift it above the footer
+  card.style.zIndex = 40;
+  const rc = card.getBoundingClientRect();
+  card.style.transformOrigin = "50% 60%";   // where the curled-up back ends up lying
+  const dx = innerWidth * .55 - (rc.left + rc.width / 2), dy = innerHeight * .95 - (rc.top + rc.height * .6);
+  const k = Math.max(innerWidth / rc.width, innerHeight / (rc.height * .45)) * 1.7;
+  const curl = document.createElement("div");
+  curl.className = "curlsheet";
+  curl.style.inset = "0";
+  document.body.appendChild(curl);
+  const veil = document.createElement("div");
+  veil.style.cssText = "position:fixed;inset:0;z-index:50;background:#dcd7cd;pointer-events:none;opacity:0";
+  document.body.appendChild(veil);
+
+  const start = performance.now();
+  const frame = now => {
+    const t = Math.min(1, (now - start) / D);
+    // curl builds early, then keeps tightening as the receipt approaches
+    const c = ease(Math.min(1, t / .6));
+    let cum = 0;
+    rStrips.forEach((st, i) => {
+      const u = i / (N - 1), w = Math.max(0, (u - .2) / .8), a = c * 36 * Math.pow(w, 1.2);
+      cum += a;
+      st.style.transform = `rotateX(${a.toFixed(2)}deg)`;
+      shade(st, cum);
+    });
+    // flight: starts slow (lifted by the wind), then speeds up toward the viewer
+    const f = Math.pow(Math.max(0, (t - .08) / .92), 2);
+    // scale is applied after the 3D projection (it comes before perspective in the list), otherwise the curl's depth
+    // is scaled too and the paper passes behind the camera
+    card.style.transform = `translate(${(dx * f).toFixed(1)}px, ${(dy * f - 12 * c).toFixed(1)}px) scale(${(1 + (k - 1) * f).toFixed(3)}) perspective(1400px) rotateZ(${(-.8 - 16 * f - 3 * c).toFixed(2)}deg) rotateY(${(10 * f).toFixed(2)}deg) rotateX(${(14 * c).toFixed(2)}deg)`;
+    curl.style.opacity = Math.max(0, (t - .82) / .1).toFixed(3);
+    veil.style.opacity = Math.max(0, (t - .9) / .1).toFixed(3);
+    if (t < 1) requestAnimationFrame(frame);
+    else { sessionStorage.setItem("fromReceipt", "1"); location.href = href; }
+  };
+  requestAnimationFrame(frame);
+}));
+// Coming back with the browser's back button restores the page from cache; reset the receipt so it is not left off screen
+addEventListener("pageshow", e => { if (e.persisted) location.reload(); });
 </script>
 </body>
 </html>
