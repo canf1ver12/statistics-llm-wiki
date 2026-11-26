@@ -276,3 +276,12 @@
   - [N8 verify][不通過] 第一次截圖長條邊緣仍然歪斜，新規則的 CSS 優先順序低於原本的蠟筆規則 → 選擇器加上 .chart 提高優先順序
   - [N8 verify][通過] 用 Chrome 以 2 倍解析度重新截圖第 9、11 頁，長條邊緣筆直，蠟筆質感保留
 - 異動頁面：lessons/sampling-clt-ci/index.html
+
+## [2026-11-27 02:25] slides | 發布到 GitHub Pages（N9）
+
+- 摘要：推送 8 個 commit（43b97bc..1777f99），內容是首頁收據卡片與轉場動畫、表格改成收銀機收據、流程方塊與重點改用蠟筆色塊、第 2、3、5 頁版面調整、中文字體統一為思源宋體、數學符號統一使用 LaTeX；使用者在 repo 設定開啟 GitHub Pages（main 分支根目錄）
+- 檢查：
+  - [N9 publish][通過] 推送前掃描 8 個 commit：只改到 index.html 與 lessons/sampling-clt-ci/index.html，沒有 raw/、PDF、.env，內容與 commit 訊息沒有學校名稱、學號、密碼或金鑰
+  - [N9 publish][通過] 網站上線後首頁與簡報都回應 200，兩個檔案與 commit 1777f99 的內容一致，首頁「開始」與簡報「目錄」的互連正常，截圖確認首頁與第 13 頁版面正常
+- 網址：https://canf1ver12.github.io/statistics-llm-wiki/
+- 異動頁面：wiki/log.md
