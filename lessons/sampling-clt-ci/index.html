@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>只抽一次樣本，怎麼知道整個母體？</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=LXGW+WenKai+TC:wght@400;700&family=Caveat+Brush&family=Special+Elite&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Caveat+Brush&family=Special+Elite&display=swap">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-/* Theme tokens: crayon illustration on textured paper (fonts H5 / S1 / B1 / T1 / R4 / L1) */
+/* Theme tokens: crayon illustration on textured paper (fonts H5 / S7 / B1 / T1 / R7 / L1) */
 :root{
   --desk:#dcd7cd; --paper-bg:#f3f0e9; --paper:#fbf8f1; --ink:#26221f; --muted:#6d655e; --line:#cfc8bb;
   --tomato:#b8483c; --pink:#d9858f; --peri:#7b80c6; --mustard:#e3bd52; --leaf:#7ea457;
@@ -19,8 +19,8 @@
   --hand:"Noto Serif TC","Noto Sans TC",serif;
   --brush:"Caveat Brush",cursive;
   --type-face:"Special Elite";
-  --receipt:"LXGW WenKai TC","Noto Sans TC",serif;
-  --note:"LXGW WenKai TC","Noto Sans TC",serif;
+  --receipt:"Noto Serif TC","Noto Sans TC",serif;
+  --note:"Noto Serif TC","Noto Sans TC",serif;
   --label:"Caveat Brush",cursive;
   --font:var(--hand);
 }
@@ -122,7 +122,7 @@ a{color:var(--tomato)}
   <div class="kicker">統計學 LLM Wiki 教學簡報</div>
   <h1>只抽一次樣本，<br>怎麼知道整個母體？</h1>
   <div class="sub">抽樣分配、中央極限定理與信賴區間</div>
-  <div class="callout">看完這份簡報，你會知道怎麼說出「有 95% 的信心，母體平均數 μ 落在某個範圍」</div>
+  <div class="callout">看完這份簡報，你會知道怎麼說出「有 95% 的信心，母體平均數 $\mu$ 落在某個範圍」</div>
   <p class="muted small">按 → 或空白鍵翻頁，每頁左下角是這頁內容對應的 Wiki 頁面</p>
 </section>
 
@@ -305,7 +305,7 @@ a{color:var(--tomato)}
   <h2>互動模擬：中央極限定理</h2>
   <div class="controls">
     <label>母體形狀 <select id="popSel"><option value="uniform">均勻</option><option value="v">V 字形</option><option value="skew">右偏</option></select></label>
-    <label>樣本數 n <select id="nSel"><option>2</option><option>5</option><option selected>30</option></select></label>
+    <label>樣本數 $n$ <select id="nSel"><option>2</option><option>5</option><option selected>30</option></select></label>
     <button class="primary" id="cltBtn">抽 500 次</button>
   </div>
   <div class="row c2 grow">
@@ -319,16 +319,16 @@ a{color:var(--tomato)}
 <section class="slide" data-wiki="concepts/central-limit-theorem.md concepts/distribution-shape.md">
   <div class="kicker">第二部分：抽樣分配與中央極限定理</div>
   <h2>中央極限定理：樣本要多大才夠</h2>
-  <div class="callout">從母體抽出大小為 n 的隨機樣本，n 夠大時，$\bar{X} \sim N\!\left(\mu, \dfrac{\sigma^2}{n}\right)$</div>
+  <div class="callout">從母體抽出大小為 $n$ 的隨機樣本，$n$ 夠大時，$\bar{X} \sim N\!\left(\mu, \dfrac{\sigma^2}{n}\right)$</div>
   <table>
     <tr><th>母體的情況</th><th>樣本數</th></tr>
     <tr><td>母體本身是常態分配</td><td>任何樣本數，$\bar{x}$ 都是常態</td></tr>
-    <tr><td>母體至少近似常態</td><td>n 小於 15 也可以</td></tr>
-    <tr><td>不是常態但大致對稱</td><td>n = 15 就夠</td></tr>
-    <tr><td>多數應用</td><td>n ≥ 30</td></tr>
-    <tr><td>母體高度偏斜或有離群值</td><td>可能需要 n = 50</td></tr>
+    <tr><td>母體至少近似常態</td><td>$n$ 小於 15 也可以</td></tr>
+    <tr><td>不是常態但大致對稱</td><td>$n = 15$ 就夠</td></tr>
+    <tr><td>多數應用</td><td>$n \ge 30$</td></tr>
+    <tr><td>母體高度偏斜或有離群值</td><td>可能需要 $n = 50$</td></tr>
   </table>
-  <p>回想剛才的模擬：右偏母體最慢變成鐘形，所以偏斜的母體需要比較大的 n<span class="tag">補充</span></p>
+  <p>回想剛才的模擬：右偏母體最慢變成鐘形，所以偏斜的母體需要比較大的 $n$<span class="tag">補充</span></p>
 </section>
 
 <!-- 13 -->
@@ -338,16 +338,16 @@ a{color:var(--tomato)}
   <div class="row c2w grow">
     <div style="display:flex;flex-direction:column;gap:.4cqw">
       <svg class="chart grow" id="seCompare" viewBox="0 0 520 250" aria-label="n 等於 30 和 100 的抽樣分配比較"></svg>
-      <p class="sim-note">EAI 例子：$\mu = 51{,}800$、$\sigma = 4{,}000$，陰影是 μ ± 500</p>
+      <p class="sim-note">EAI 例子：$\mu = 51{,}800$、$\sigma = 4{,}000$，陰影是 $\mu \pm 500$</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:1cqw">
       <table>
-        <tr><th></th><th>n = 30</th><th>n = 100</th></tr>
+        <tr><th></th><th>$n = 30$</th><th>$n = 100$</th></tr>
         <tr><td>標準誤差</td><td>730.3</td><td>400</td></tr>
-        <tr><td>$\bar{x}$ 落在 μ ± 500 的機率</td><td>0.5034</td><td>0.7888</td></tr>
+        <tr><td>$\bar{x}$ 落在 $\mu \pm 500$ 的機率</td><td>0.5034</td><td>0.7888</td></tr>
       </table>
-      <p>$\sigma_{\bar{x}} < \sigma$，n 越大，$\bar{x}$ 的曲線越陡、越集中在 $\mu$ 附近</p>
-      <div class="callout warn">易錯：$\sigma^2/n$ 是 $\bar{X}$ 的變異數，標準誤差要開根號，是 $\sigma/\sqrt{n}$</div>
+      <p>$\sigma_{\bar{x}} < \sigma$，$n$ 越大，$\bar{x}$ 的曲線越陡、越集中在 $\mu$ 附近</p>
+      <div class="callout warn">易錯：$\dfrac{\sigma^2}{n}$ 是 $\bar{X}$ 的變異數，標準誤差要開根號，是 $\dfrac{\sigma}{\sqrt{n}}$</div>
     </div>
   </div>
 </section>
@@ -356,7 +356,7 @@ a{color:var(--tomato)}
 <section class="slide" data-wiki="concepts/confidence-interval.md">
   <div class="kicker">第三部分：信賴區間</div>
   <h2>從中央極限定理到信賴區間</h2>
-  <div class="callout">前提：$\bar{X}$ 近似常態分配，也就是 $X \sim N(\mu, \sigma^2)$，或 n ≥ 30 by CLT，作答時一定要寫出來</div>
+  <div class="callout">前提：$\bar{X}$ 近似常態分配，也就是 $X \sim N(\mu, \sigma^2)$，或 $n \ge 30$ by CLT，作答時一定要寫出來</div>
   <div class="row c3">
     <div class="card"><div class="num">1</div><h3>標準化，兩尾各留 $\alpha/2$</h3>
       <p class="small">$P\!\left(-z_{\alpha/2}\frac{\sigma}{\sqrt{n}} < \bar{X} - \mu < z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right) = 1 - \alpha$</p></div>
@@ -373,8 +373,8 @@ a{color:var(--tomato)}
   <div class="kicker">第三部分：信賴區間</div>
   <h2>例子：Lloyd's 百貨的顧客平均花費</h2>
   <div class="flow">
-    <div class="box">已知<span class="d">σ = 20、n = 100</span></div><div class="arrow">→</div>
-    <div class="box">標準誤差<span class="d">$20/\sqrt{100} = 2$</span></div><div class="arrow">→</div>
+    <div class="box">已知<span class="d">$\sigma = 20$、$n = 100$</span></div><div class="arrow">→</div>
+    <div class="box">標準誤差<span class="d">$\dfrac{20}{\sqrt{100}} = 2$</span></div><div class="arrow">→</div>
     <div class="box">邊際誤差<span class="d">$1.96 \times 2 = 3.92$</span></div><div class="arrow">→</div>
     <div class="box">區間<span class="d">$82 \pm 3.92$</span></div>
   </div>
@@ -397,8 +397,8 @@ a{color:var(--tomato)}
     <span id="ciCount" class="muted">還沒開始</span>
   </div>
   <svg class="chart grow" id="ciChart" viewBox="0 0 900 300" aria-label="100 個信賴區間"></svg>
-  <p class="sim-note">模擬設定：假設真正的 $\mu = 80$（自訂數字）、$\sigma = 20$、$n = 100$，每個樣本算出 $\bar{x} \pm 3.92$；綠色包含 μ，紅色沒包含；隨機模擬，每次結果不同</p>
-  <div class="callout">用這個方法建立的區間，有 95% 會包含 μ，所以對手上這一個區間說「有 95% 的信心」</div>
+  <p class="sim-note">模擬設定：假設真正的 $\mu = 80$（自訂數字）、$\sigma = 20$、$n = 100$，每個樣本算出 $\bar{x} \pm 3.92$；綠色包含 $\mu$，紅色沒包含；隨機模擬，每次結果不同</p>
+  <div class="callout">用這個方法建立的區間，有 95% 會包含 $\mu$，所以對手上這一個區間說「有 95% 的信心」</div>
 </section>
 
 <!-- 17 -->
@@ -417,9 +417,9 @@ a{color:var(--tomato)}
     </div>
     <div style="display:flex;flex-direction:column;gap:1cqw">
       <div class="card"><h3>邊際誤差</h3><p>$E = z_{\alpha/2}\dfrac{\sigma}{\sqrt{n}}$，區間寬度 = $2E$</p>
-        <p class="small">信賴水準越高，區間越寬；n 越大，區間越窄</p></div>
+        <p class="small">信賴水準越高，區間越寬；$n$ 越大，區間越窄</p></div>
       <div class="card hi"><h3>反推樣本數</h3><p>$n = \left(\dfrac{z_{\alpha/2}\,\sigma}{E}\right)^2$</p>
-        <p class="small">95% 信賴、σ = 9.65、希望 E = 2：$n = 89.43$，無條件進位取 90</p></div>
+        <p class="small">95% 信賴、$\sigma = 9.65$、希望 $E = 2$：$n = 89.43$，無條件進位取 90</p></div>
     </div>
   </div>
 </section>
@@ -427,14 +427,14 @@ a{color:var(--tomato)}
 <!-- 18 -->
 <section class="slide" data-wiki="concepts/confidence-interval.md">
   <div class="kicker">第三部分：信賴區間</div>
-  <h2>如果不知道 σ</h2>
+  <h2>如果不知道 $\sigma$</h2>
   <div class="row c3">
-    <div class="card"><h3>σ 已知</h3><p>$\bar{x} \pm z_{\alpha/2}\dfrac{\sigma}{\sqrt{n}}$</p></div>
-    <div class="card"><h3>σ 未知，n &lt; 30</h3><p>$\bar{x} \pm t_{\alpha/2}(n-1)\dfrac{s}{\sqrt{n}}$</p><p class="small muted">母體是常態或不嚴重偏離常態</p></div>
-    <div class="card"><h3>σ 未知，n ≥ 30</h3><p>$\bar{x} \pm z_{\alpha/2}\dfrac{s}{\sqrt{n}}$</p><p class="small muted">n 很大時 t 分配近似標準常態</p></div>
+    <div class="card"><h3>$\sigma$ 已知</h3><p>$\bar{x} \pm z_{\alpha/2}\dfrac{\sigma}{\sqrt{n}}$</p></div>
+    <div class="card"><h3>$\sigma$ 未知，$n &lt; 30$</h3><p>$\bar{x} \pm t_{\alpha/2}(n-1)\dfrac{s}{\sqrt{n}}$</p><p class="small muted">母體是常態或不嚴重偏離常態</p></div>
+    <div class="card"><h3>$\sigma$ 未知，$n \ge 30$</h3><p>$\bar{x} \pm z_{\alpha/2}\dfrac{s}{\sqrt{n}}$</p><p class="small muted">$n$ 很大時 t 分配近似標準常態</p></div>
   </div>
   <p>t 分配比標準常態矮胖，自由度越大越接近標準常態</p>
-  <p class="small muted">註：講義的做法是 σ 未知一律用 t，並說自由度超過 100 時 z 才是 t 的好近似；本簡報採用筆記的做法，細節見 Wiki</p>
+  <p class="small muted">註：講義的做法是 $\sigma$ 未知一律用 t，並說自由度超過 100 時 z 才是 t 的好近似；本簡報採用筆記的做法，細節見 Wiki</p>
 </section>
 
 <!-- 19 -->
@@ -444,9 +444,9 @@ a{color:var(--tomato)}
   <table>
     <tr><th>誤解</th><th>正確的說法</th></tr>
     <tr><td>樣本夠大，資料就會變成常態</td><td>中央極限定理說的是 $\bar{x}$ 的分配，母體和樣本資料的形狀不會改變</td></tr>
-    <tr><td>n ≥ 30 永遠夠用</td><td>母體高度偏斜或有離群值時，可能要 n = 50</td></tr>
-    <tr><td>標準誤差是 $\sigma^2/n$</td><td>$\sigma^2/n$ 是變異數，標準誤差是 $\sigma/\sqrt{n}$</td></tr>
-    <tr><td>μ 有 95% 的機率在這個區間裡</td><td>μ 是固定的數字，會變的是區間；95% 是這個方法的成功率</td></tr>
+    <tr><td>$n \ge 30$ 永遠夠用</td><td>母體高度偏斜或有離群值時，可能要 $n = 50$</td></tr>
+    <tr><td>標準誤差是 $\dfrac{\sigma^2}{n}$</td><td>$\dfrac{\sigma^2}{n}$ 是變異數，標準誤差是 $\dfrac{\sigma}{\sqrt{n}}$</td></tr>
+    <tr><td>$\mu$ 有 95% 的機率在這個區間裡</td><td>$\mu$ 是固定的數字，會變的是區間；95% 是這個方法的成功率</td></tr>
     <tr><td>曲線的高度就是機率</td><td>連續型的機率是曲線下的面積</td></tr>
   </table>
 </section>
@@ -462,10 +462,10 @@ a{color:var(--tomato)}
   </div>
   <div class="flow">
     <div class="box">中央極限定理<span class="d">$\bar{x}$ 近似常態</span></div><div class="arrow">→</div>
-    <div class="box">標準誤差<span class="d">$\sigma/\sqrt{n}$，n 越大越準</span></div><div class="arrow">→</div>
-    <div class="box">信賴區間<span class="d">$\bar{x} \pm z_{\alpha/2}\,\sigma/\sqrt{n}$</span></div>
+    <div class="box">標準誤差<span class="d">$\dfrac{\sigma}{\sqrt{n}}$，$n$ 越大越準</span></div><div class="arrow">→</div>
+    <div class="box">信賴區間<span class="d">$\bar{x} \pm z_{\alpha/2}\dfrac{\sigma}{\sqrt{n}}$</span></div>
   </div>
-  <div class="callout">只抽一次樣本，我們說不出 μ 的確切值，但可以說出「有 95% 的信心，μ 落在這個範圍」</div>
+  <div class="callout">只抽一次樣本，我們說不出 $\mu$ 的確切值，但可以說出「有 95% 的信心，$\mu$ 落在這個範圍」</div>
 </section>
 
 <!-- 21 -->
