@@ -226,6 +226,8 @@ document.querySelectorAll(".receipt .btn").forEach(btn => btn.addEventListener("
   const veil = document.createElement("div");
   veil.style.cssText = "position:fixed;inset:0;z-index:30;background:#dcd7cd;pointer-events:none;opacity:0";
   document.body.appendChild(veil);           // under the card: the card leaves over the new colour
+  // the card's section sits above the veil, so its other contents (heading, placeholder card) fade out with it
+  const others = [...card.closest("section").querySelectorAll("h2, .cards > *")].filter(el => el !== card);
   const rc = card.getBoundingClientRect();
   // the card grows from its centre, so it has to travel further up to leave the screen
   const up = rc.top + rc.height / 2 + rc.height * S / 2 + 60;
@@ -237,6 +239,7 @@ document.querySelectorAll(".receipt .btn").forEach(btn => btn.addEventListener("
     card.style.transform = `translate(${(60 * g).toFixed(1)}px, ${(-14 * p - up * g).toFixed(1)}px) scale(${s.toFixed(3)}) perspective(1400px) rotateX(${(-10 * g).toFixed(2)}deg) rotate(${(-.8 - 1.5 * p - 8 * g).toFixed(2)}deg)`;
     card.style.filter = `drop-shadow(0 ${(1 + 2 * p).toFixed(1)}px ${(1 + p).toFixed(1)}px rgba(38,34,31,.18)) drop-shadow(${(2 + 6 * p + 20 * g).toFixed(1)}px ${(4 + 14 * p + 50 * g).toFixed(1)}px ${(5 + 12 * p + 40 * g).toFixed(1)}px rgba(38,34,31,${(.12 + .06 * p - .1 * g).toFixed(3)}))`;
     veil.style.opacity = seg(t, .35, .9).toFixed(3);
+    others.forEach(el => el.style.opacity = (1 - seg(t, .35, .9)).toFixed(3));
     if (t < 1) requestAnimationFrame(frame);
     else { sessionStorage.setItem("fromReceipt", "1"); location.href = href; }
   };
