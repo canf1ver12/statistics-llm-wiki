@@ -46,7 +46,10 @@ python3 -m venv .venv
 open index.html
 ```
 
-線上版：TODO: 開啟 GitHub Pages 後補上網址
+線上版：
+
+- 講義目錄：https://canf1ver12.github.io/statistics-llm-wiki/
+- 簡報：https://canf1ver12.github.io/statistics-llm-wiki/lessons/sampling-clt-ci/index.html
 
 ## 使用方式 (Usage)
 
